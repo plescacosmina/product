@@ -31,12 +31,5 @@
 <!-- https://jquery.com/download/ -->
 <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 <!-- https://getbootstrap.com/ -->
-<script>
-    $(function () {
-        $(".tm-product-name").on("click", function () {
-            window.location.href = "edit-product.html"
-        })
-    })
-</script>
 </body>
 </html>

@@ -58,6 +58,7 @@
                                 <th scope="col">DATE ADDED</th>
                                 <th scope="col">&nbsp;</th>
                                 <th scope="col">&nbsp;</th>
+								<th scope="col">&nbsp;</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -69,6 +70,11 @@
                                 <td><?= $product->price ?></td>
                                 <td><?= $product->units ?></td>
                                 <td><?= $product->created_at ?></td>
+								<td>
+                                    <a href="{{ url('/edit') . '/' . $product->id }}" class="tm-product-delete-link">
+                                        <i class="fa fa-edit tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
                                 <td>
                                     <a href="{{ url('/view') . '/' . $product->id }}" class="tm-product-delete-link">
                                         <i class="fa fa-search tm-product-delete-icon"></i>

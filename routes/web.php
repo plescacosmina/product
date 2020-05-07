@@ -26,6 +26,9 @@ Route::get('logout', array('uses' => 'HomeController@logout'));
 Route::get('add', array('uses' => 'HomeController@add'));
 Route::post('add', array('uses' => 'HomeController@addProduct'));
 
+Route::get('edit/{id}', array('uses' => 'HomeController@edit'));
+Route::post('edit/{id}', array('uses' => 'HomeController@editProduct'));
+
 
 Route::get('delete/{id}', array('uses' => 'HomeController@deleteTestimonialUsingProcedure'));
 

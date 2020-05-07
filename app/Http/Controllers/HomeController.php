@@ -102,6 +102,40 @@ class HomeController extends Controller
             return Redirect::to('/');
         }
     }
+	
+	public function edit($id)
+    {
+        $product = DB::select('CALL getProduct(?)', array($id));
+
+        return view('pages.edit')->with('product', $product);
+    }
+	
+	public function editProduct(Request $request, $id)
+    {
+        $rules = array(
+            'name' => 'required',
+            'description' => '',
+            'price' => '',
+            'units' => ''
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('add')
+                ->withErrors($validator);
+        } else {
+            $product = Product::where('id', $id)->firstOrFail();
+            $product->name = Input::get('name');
+            $product->description = Input::get('description');
+            $product->price = Input::get('price');
+            $product->units = Input::get('units');
+
+            $product->save();
+
+            return Redirect::to('/');
+        }
+    }
 
     public function deleteTestimonialUsingProcedure($id)
     {
