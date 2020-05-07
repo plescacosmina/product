@@ -128,28 +128,35 @@ class HomeController extends Controller
         session(['numberOfHitsPerSession' => session('numberOfHitsPerSession') + 1]);
         $id = \Auth::user()->id;
         $user = DB::select('CALL getUser(?)', array($id));
-        return view('pages.account')->with('user', $user)->with('numberOfHitsPerSession', session('numberOfHitsPerSession'));
+		$image = Image::where('user_id', $id)
+			->orderBy('created_at', 'desc')
+			->firstOrFail();
+        return view('pages.account')
+			->with('user', $user)
+			->with('numberOfHitsPerSession', session('numberOfHitsPerSession'))
+			->with('image', $image);
     }
 
-//    public function addImage()
-//    {
-//        $rules = array(
-//            'image' => 'required'
-//        );
-//
-//        $validator = Validator::make(Input::all(), $rules);
-//
-//        if ($validator->fails()) {
-//            return Redirect::to('account')
-//                ->withErrors($validator);
-//        } else {
-//            $image = new Image();
-//            $image->user_id = Input::get('user_id');
-//            $image->image = $imagedata = base64_encode(file_get_contents(Input::get('image')->pat‌​h()));
-//
-//            $image->save();
-//
-//            return Redirect::to('/account');
-//        }
-//    }
+    public function addImage(Request $request)
+    {
+		$file = Input::file('image')->path();
+        $rules = array(
+           'image' => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+			return Redirect::to('account')
+				->withErrors($validator);
+		} else {
+			$image = new Image();
+			$image->user_id = \Auth::user()->id;
+			$image->image = $imagedata = base64_encode(file_get_contents($file));
+
+			$image->save();
+
+			return Redirect::to('/account');
+		}
+	}
 }

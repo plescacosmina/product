@@ -52,26 +52,28 @@
                     <div class="tm-bg-primary-dark tm-block tm-block-avatar">
                         <h2 class="tm-block-title">Change Avatar</h2>
                         <div class="tm-avatar-container">
-                            <img
-                                    src="img/avatar.png"
+							@if($image)
+								<img
+                                    src="{{ 'data:image/png;base64,' . $image->image }}"
                                     alt="Avatar"
                                     class="tm-avatar img-fluid mb-4"
-                            />
+								/>	
+							@endif
                         </div>
-                        {{--{{ Form::open(array('url' => 'account', 'id' => 'contact')) }}--}}
-                            {{--<p style="color: white">--}}
-                                {{--{{ $errors->first('image') }}--}}
-                            {{--</p>--}}
-                            {{--<div class="form-group mb-3">--}}
-                                {{--<fieldset>--}}
-                                    {{--<label for="image">File</label>--}}
-                                    {{--{{ Form::file('image', '', array('class' => 'form-control validate')) }}--}}
-                                {{--</fieldset>--}}
-                            {{--</div>--}}
-                            {{--<button type="submit" class="btn btn-primary btn-block text-uppercase">--}}
-                                {{--Upload New Photo--}}
-                            {{--</button>--}}
-                        {{--{{ Form::close() }}--}}
+						<form class="contact-form" action="{{ action('HomeController@addImage')}}" method="post" enctype="multipart/form-data">
+							@csrf
+							<div class="form-group mb-3">
+								<p style="color: white">
+									{{ $errors->first('image') }}
+								</p>
+								<div class="col-md-12">
+									<input type="file" placeholder="Image" id="image" name="image" />
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary btn-block text-uppercase">
+								Incarca Imagine
+							</button>
+						</form>
                     </div>
                 </div>
                 <div class="tm-block-col tm-col-account-settings">
