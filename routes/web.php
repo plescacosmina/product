@@ -30,7 +30,7 @@ Route::get('edit/{id}', array('uses' => 'HomeController@edit'));
 Route::post('edit/{id}', array('uses' => 'HomeController@editProduct'));
 
 
-Route::get('delete/{id}', array('uses' => 'HomeController@deleteTestimonialUsingProcedure'));
+Route::get('delete/{id}', array('uses' => 'HomeController@deleteProductUsingProcedure'));
 
 Route::get('/view/{id}', 'HomeController@getProduct');
 

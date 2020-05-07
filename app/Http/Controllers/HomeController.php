@@ -137,7 +137,7 @@ class HomeController extends Controller
         }
     }
 
-    public function deleteTestimonialUsingProcedure($id)
+    public function deleteProductUsingProcedure($id)
     {
         $status = DB::select('CALL deleteProduct(?)', array($id));
         if($status) {
